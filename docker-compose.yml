@@ -1,20 +1,32 @@
+version: '3'
 
-tcserver:
-  image: spring-petclinic:1.0.3
-  links:
-    - mysql:mysql
-  ports:
-    - 9090:8080
-  environment:
-    spring.profiles.active: jpa,docker
-    profiles: jpa,docker
+services:
 
-mysql:
-  image: mysql
-  volumes:
-    - ~/Development/spring-petclinic/src/main/resources/db/mysql:/docker-entrypoint-initdb.d
-  environment:
-    MYSQL_ROOT_PASSWORD: yoursecretpassword
-    MYSQL_DATABASE: petclinic
-    MYSQL_USER: stan_db
-    MYSQL_PASSWORD: stan_db
+  tomcat:
+    # Path to Dockerfile, relative to docker-compose file
+    image: sguillory6/spring-petclinic:1.1.0
+    depends_on:
+      - mysql
+#    build: .
+    networks:
+      - petclinic-network
+    ports:
+      - 8080:8080
+    command: ["/usr/local/tomcat/bin//wait-for-it.sh", "mysql:3306", "--", "/usr/local/tomcat/bin/catalina.sh", "run"]
+    environment:
+      spring.profiles.active: jpa,docker
+      profiles: jpa,docker
+
+  mysql:
+    image: mysql:8.0
+    networks:
+      - petclinic-network
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: petclinic
+      MYSQL_USER: petclinic
+      MYSQL_PASSWORD: petclinic
+
+networks:
+  petclinic-network:
+    driver: bridge # a user defined bridge is required; the default bridge network doesn't support name resolution

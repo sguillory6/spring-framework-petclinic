@@ -29,7 +29,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 
 @SpringJUnitConfig(locations = {"classpath:spring/business-config.xml"})
-@ActiveProfiles("jdbc")
+@ActiveProfiles({"jdbc","hsqldb"})
 class ClinicServiceJdbcTests extends AbstractClinicServiceTests {
 
 

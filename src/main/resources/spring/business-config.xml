@@ -32,19 +32,30 @@
                                     - spring-data-jpa
           =============================================================================-->
 
+    <!-- the 'database' parameter refers to the database dialect being used.
+        By default, Hibernate will use a 'HSQL' dialect because 'jpa.database' has been set to 'HSQL'
+        inside file spring/data-access.properties
+     -->
+    <beans profile="hsqldb">
+        <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+              p:database="HSQL" p:showSql="${jpa.showSql}"/>
+    </beans>
+
+    <beans profile="mysql">
+        <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+              p:database="MYSQL" p:showSql="${jpa.showSql}"/>
+    </beans>
+
+    <beans profile="postgresql">
+        <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+              p:database="POSTGRESQL" p:showSql="${jpa.showSql}"/>
+    </beans>
+
     <beans profile="jpa,spring-data-jpa">
         <!-- JPA EntityManagerFactory -->
         <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
               p:dataSource-ref="dataSource">
-            <property name="jpaVendorAdapter">
-                <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
-                      p:database="${jpa.database}" p:showSql="${jpa.showSql}"/>
-                <!-- the 'database' parameter refers to the database dialect being used.
-                	By default, Hibernate will use a 'HSQL' dialect because 'jpa.database' has been set to 'HSQL'
-                	inside file spring/data-access.properties
-
-                 -->
-            </property>
+            <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
             <!-- gDickens: BOTH Persistence Unit and Packages to Scan are NOT compatible, persistenceUnit will win -->
             <property name="persistenceUnitName" value="petclinic"/>
             <property name="packagesToScan" value="org.springframework.samples.petclinic"/>

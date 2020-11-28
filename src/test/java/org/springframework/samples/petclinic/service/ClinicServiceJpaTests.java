@@ -13,7 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
  */
 
 @SpringJUnitConfig(locations = {"classpath:spring/business-config.xml"})
-@ActiveProfiles("jpa")
+@ActiveProfiles({"jpa","hsqldb"})
 class ClinicServiceJpaTests extends AbstractClinicServiceTests {
 
 }
