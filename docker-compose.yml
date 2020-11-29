@@ -4,7 +4,7 @@ services:
 
   tomcat:
     # Path to Dockerfile, relative to docker-compose file
-    image: sguillory6/spring-petclinic:1.1.0
+    image: spring-petclinic:1.1.2
     depends_on:
       - mysql
 #    build: .
@@ -14,8 +14,7 @@ services:
       - 8080:8080
     command: ["/usr/local/tomcat/bin//wait-for-it.sh", "mysql:3306", "--", "/usr/local/tomcat/bin/catalina.sh", "run"]
     environment:
-      spring.profiles.active: jpa,docker
-      profiles: jpa,docker
+      spring.profiles.active: jpa,mysql
 
   mysql:
     image: mysql:8.0

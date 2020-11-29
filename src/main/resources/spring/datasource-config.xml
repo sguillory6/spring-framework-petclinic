@@ -51,6 +51,19 @@
         </jdbc:initialize-database>
     </beans>
 
+    <beans profile="mysql-ecs">
+        <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+              p:driverClassName="com.mysql.cj.jdbc.Driver" p:url="jdbc:mysql://mysql.petclinic.local:3306/petclinic?useUnicode=true"
+              p:username="petclinic" p:password="petclinic"/>
+
+        <!-- Database initializer. If any of the script fails, the initialization stops. -->
+        <!-- As an alternative, for embedded databases see <jdbc:embedded-database/>. -->
+        <jdbc:initialize-database data-source="dataSource">
+            <jdbc:script location="classpath:db/mysql/initDB.sql"/>
+            <jdbc:script location="classpath:db/mysql/populateDB.sql"/>
+        </jdbc:initialize-database>
+    </beans>
+
     <beans profile="postgresql">
         <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
               p:driverClassName="org.postgresql.Driver" p:url="jdbc:postgresql://localhost:5432/petclinic"
