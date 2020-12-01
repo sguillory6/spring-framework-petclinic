@@ -1,0 +1,12 @@
+version: 0.0
+os: linux
+files:
+  - source: /springpetclnic/target/petclinic.war
+    destination: /opt/apache-tomcat-9.0.40/webapps
+hooks:
+  ApplicationStop:
+    - location: /opt/apache-tomcat-9.0.40/bin/catalina.sh start
+      timeout: 300
+  ApplicationStart:
+    - location: opt/apache-tomcat-9.0.40/bin/catalina.sh stop
+      timeout: 300
