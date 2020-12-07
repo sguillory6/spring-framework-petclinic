@@ -1,4 +1,5 @@
 FROM maven:3.5.2-jdk-8-alpine AS MAVEN_TOOL_CHAIN
+LABEL image=test
 ENV spring.profiles.active hsqldb
 COPY pom.xml /tmp/
 COPY src /tmp/src/
