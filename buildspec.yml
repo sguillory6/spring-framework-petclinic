@@ -12,5 +12,7 @@ phases:
 artifacts:
   files:
     - target/petclinic.war
+    - scripts/start_tomcat.sh
+    - scripts/stop_tomcat.sh
     - appspec.yml
   discard-paths: yes

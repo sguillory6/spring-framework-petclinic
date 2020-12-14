@@ -478,6 +478,21 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>stang-artifact-domain--stang-artifact-repository</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>stang-artifact-domain--stang-artifact-repository</id>
+                    <url>https://stang-artifact-domain-750353892954.d.codeartifact.us-west-2.amazonaws.com/maven/stang-artifact-repository/</url>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
+
     <repositories>
         <repository>
             <id>repository.spring.milestone</id>
@@ -486,4 +501,11 @@
         </repository>
     </repositories>
 
+    <distributionManagement>
+        <repository>
+            <id>stang-artifact-domain--stang-artifact-repository</id>
+            <name>stang-artifact-domain--stang-artifact-repository</name>
+            <url>https://stang-artifact-domain-750353892954.d.codeartifact.us-west-2.amazonaws.com/maven/stang-artifact-repository/</url>
+        </repository>
+    </distributionManagement>
 </project>

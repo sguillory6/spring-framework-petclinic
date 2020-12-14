@@ -1,0 +1,1 @@
+export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain stang-artifact-domain --domain-owner 750353892954 --query authorizationToken --output text`

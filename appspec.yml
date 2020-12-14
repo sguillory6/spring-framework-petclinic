@@ -5,8 +5,8 @@ files:
     destination: /opt/apache-tomcat-9.0.40/webapps
 hooks:
   ApplicationStop:
-    - location: /opt/apache-tomcat-9.0.40/bin/shutdown.sh
+    - location: shutdown_tomcat.sh
       timeout: 300
   ApplicationStart:
-    - location: /opt/apache-tomcat-9.0.40/bin/startup.sh
+    - location: start_tomcat.sh
       timeout: 300
