@@ -41,7 +41,7 @@
               p:database="HSQL" p:showSql="${jpa.showSql}"/>
     </beans>
 
-    <beans profile="mysql,mysql-ecs">
+    <beans profile="mysql,mysql-ecs,mysql-ec2">
         <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
               p:database="MYSQL" p:showSql="${jpa.showSql}"/>
     </beans>
